@@ -1,5 +1,5 @@
-﻿using LoadDwh.Data.Entites.DwSells;
-using LoadDwh.Data.Entites.Northwind;
+﻿using LoadDwh.Data.Entites.DwOrders;
+using LoadDwh.Data.Entities.DwOrders;
 using Microsoft.EntityFrameworkCore;
 
 namespace LoadDwh.Data.Contexts
@@ -12,6 +12,8 @@ namespace LoadDwh.Data.Contexts
         public DbSet<DimCategory> DimCategories { get; set; }
         public DbSet<DimEmployee> DimEmployees { get; set; }
         public DbSet<DimProduct> DimProducts { get; set; }
+        public DbSet<DimCustomer> DimCustomers { get; set; }
+        public DbSet<DimShipper> DimShippers { get; set; }
         #endregion
     }
 }

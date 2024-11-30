@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LoadDwh.Data.Entites.Northwind
+namespace LoadDwh.Data.Entites.DwOrders
 {
     public class DimCategory
     {

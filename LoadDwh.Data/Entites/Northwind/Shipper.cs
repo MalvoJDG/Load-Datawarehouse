@@ -2,14 +2,14 @@
 
 namespace LoadDwh.Data.Entites.Northwind
 {
-    public class DimProduct
+    public class Shipper
     {
         [Key]
-        public int ProductID { get; set; }
+        public int ShipperId { get; set; }
 
         [Required]
         [StringLength(40)]
-        public string ProductName { get; set; }
-
+        public string CompanyName { get; set; }
+        public string? Phone {  get; set; }
     }
 }
