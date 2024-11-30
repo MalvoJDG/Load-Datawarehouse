@@ -27,8 +27,10 @@ namespace LoadDwh.Data.Interfaces.DwOrders
                 //await LoadDimEmployee();
                 //await LoadDimCategory();
                 //await LoadDimProducts();
-                await LoadDimCustomers();
-                await LoadDimShippers();
+                //await LoadDimCustomers();
+                //await LoadDimShippers();
+                //await LoadFactSales();
+                await LoadFactCustomersSuported();
             }
             catch (Exception ex)
             {
@@ -161,6 +163,38 @@ namespace LoadDwh.Data.Interfaces.DwOrders
             {
                 result.Success = false;
                 result.Message = $"An error has ocurred loading DimShippers.{ex.Message}";
+            }
+
+            return result;
+        }
+
+        private async Task<OperationResults> LoadFactSales()
+        {
+            OperationResults result = new OperationResults();
+            try
+            {
+                var sales = _northwind.SalesSummaries.AsNoTracking().ToListAsync();
+            }
+            catch(Exception ex)
+            {
+                result.Success = false;
+                result.Message = $"An error has ocurred loading FactSales.{ex.Message}";
+            }
+
+            return result;
+        }
+
+        private async Task<OperationResults> LoadFactCustomersSuported()
+        {
+            OperationResults result = new OperationResults();
+            try
+            {
+                var sales = _northwind.TotalSuporteds.AsNoTracking().ToListAsync();
+            }
+            catch (Exception ex)
+            {
+                result.Success = false;
+                result.Message = $"An error has ocurred loading FactCustomerSuported.{ex.Message}";
             }
 
             return result;

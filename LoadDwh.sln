@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadDwh.Data", "LoadDwh.Dat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadDwh.WorkerService", "LoadDwh.WorkerService\LoadDwh.WorkerService.csproj", "{0978D5B8-E112-4C10-B11D-FD2EDF09D8A3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadDwh.Models", "LoadDwh.Models\LoadDwh.Models.csproj", "{08321958-E9D0-4116-A36C-268E8665FBDA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0978D5B8-E112-4C10-B11D-FD2EDF09D8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0978D5B8-E112-4C10-B11D-FD2EDF09D8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0978D5B8-E112-4C10-B11D-FD2EDF09D8A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08321958-E9D0-4116-A36C-268E8665FBDA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08321958-E9D0-4116-A36C-268E8665FBDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08321958-E9D0-4116-A36C-268E8665FBDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08321958-E9D0-4116-A36C-268E8665FBDA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
