@@ -1,4 +1,5 @@
 ﻿using LoadDwh.Data.Entites.Northwind;
+using LoadDwh.Data.Entities.Northwind;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 
