@@ -49,6 +49,8 @@ namespace LoadDwh.Data.Contexts
                 entity.Property(e => e.ShipperName)
                     .IsRequired()
                     .HasMaxLength(40);
+                entity.Property(e => e.ProductId) 
+                    .HasColumnName("ProductId"); ;
 
                 modelBuilder.Entity<TotalSuported>(entity =>
                 {

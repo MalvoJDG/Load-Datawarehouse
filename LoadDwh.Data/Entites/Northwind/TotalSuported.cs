@@ -6,5 +6,5 @@ public class TotalSuported
 
     public string NombreEmpleado { get; set; }
 
-    public int? NumeroDeClientesAtendidos { get; set; }
+    public int NumeroDeClientesAtendidos { get; set; }
 }

@@ -6,6 +6,7 @@ namespace LoadDwh.Data.Entites.DwOrders
     {
         [Key]
         public int ProductID { get; set; }
+        public int ProductKey{ get; set; }
 
         [Required]
         [StringLength(40)]

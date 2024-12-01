@@ -1,7 +1,9 @@
 ﻿using LoadDwh.Data.Contexts;
+using LoadDwh.Data.DwOrders;
 using LoadDwh.Data.Entites.DwOrders;
 using LoadDwh.Data.Entites.Northwind;
 using LoadDwh.Data.Entities.DwOrders;
+using LoadDwh.Data.Entities.Northwind;
 using LoadDwh.Data.Results;
 using Microsoft.EntityFrameworkCore;
 
@@ -101,6 +103,7 @@ namespace LoadDwh.Data.Interfaces.DwOrders
                 //Obtener productos de la base de datos de northwind
                 var product = _northwind.Products.AsNoTracking().Select(prod => new DimProduct()
                 {
+                    ProductKey = prod.ProductID,
                     ProductName = prod.ProductName
                 }).ToList();
 
@@ -173,7 +176,41 @@ namespace LoadDwh.Data.Interfaces.DwOrders
             OperationResults result = new OperationResults();
             try
             {
-                var sales = _northwind.SalesSummaries.AsNoTracking().ToListAsync();
+                var sales = await _northwind.SalesSummaries.AsNoTracking().ToListAsync();
+
+                int[] ordersId = await _dbOrderContext.FactSales.Select(cd => cd.OrderId).ToArrayAsync();
+
+                if (ordersId.Any())
+                {
+                    await _dbOrderContext.FactSales.Where(cd => ordersId.Contains(cd.OrderId))
+                                                   .AsNoTracking()
+                                                   .ExecuteDeleteAsync();
+                                                            
+                }
+
+                foreach(var cd in sales)
+                {
+                    var customer =  _dbOrderContext.DimCustomers.SingleOrDefault(cust => cust.CustomerID == cd.CustomerId);
+                    var employee = _dbOrderContext.DimEmployees.SingleOrDefault(emp => emp.EmployeeKey == cd.EmployeeId);
+                    var shipper = _dbOrderContext.DimShippers.SingleOrDefault(ship => ship.ShipperId == cd.ShipperId);
+                    var product = _dbOrderContext.DimProducts.SingleOrDefault(prod => prod.ProductKey == cd.ProductId);
+
+                    FactSale factsale = new FactSale
+                    {
+                        QuantitySold = cd.Cantidad,
+                        Country = cd.Country,
+                        DateId = cd.DateKey,
+                        CustomerId = customer.CustomerID,
+                        EmployeeId = employee.EmployeeKey,
+                        ShipperId = shipper.ShipperId,
+                        TotalSales = (decimal)cd.TotalVentas,
+                        ProductId = product.ProductID
+                    };
+                    await _dbOrderContext.AddAsync(factsale);
+                    await _dbOrderContext.SaveChangesAsync();
+                };
+                    
+                
             }
             catch(Exception ex)
             {
@@ -189,7 +226,33 @@ namespace LoadDwh.Data.Interfaces.DwOrders
             OperationResults result = new OperationResults();
             try
             {
-                var sales = _northwind.TotalSuporteds.AsNoTracking().ToListAsync();
+               var customerSup = await _northwind.TotalSuporteds.AsNoTracking().ToListAsync();
+
+               int[] custoSup = await _dbOrderContext.factSupportedCustomers.Select(cd => cd.SupportedCustomersId).ToArrayAsync();
+
+                if (custoSup.Any())
+                {
+                    await _dbOrderContext.factSupportedCustomers.Where(cd => custoSup.Contains(cd.SupportedCustomersId))
+                                                   .AsNoTracking()
+                                                   .ExecuteDeleteAsync();
+
+                }
+
+                foreach (var cd in customerSup)
+                {
+                    var employee = _dbOrderContext.DimEmployees.SingleOrDefault(emp => emp.EmployeeKey == cd.EmployeeId && emp.Name == cd.NombreEmpleado);
+
+                    FactSupportedCustomer factcustom = new FactSupportedCustomer
+                    {
+                        TotalCustomers = cd.NumeroDeClientesAtendidos,
+                        EmployeeId = employee.EmployeeId,
+                        EmployeerName = cd.NombreEmpleado
+                        
+
+                    };
+                    await _dbOrderContext.AddAsync(factcustom);
+                    await _dbOrderContext.SaveChangesAsync();
+                }
             }
             catch (Exception ex)
             {

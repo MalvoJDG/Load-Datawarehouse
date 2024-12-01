@@ -1,6 +1,6 @@
 ﻿{
    "CodeGenerationMode": 3,
-   "ContextClassName": "NorthwindContext",
+   "ContextClassName": "DbOrderContext",
    "ContextNamespace": null,
    "FilterSchemas": false,
    "IncludeConnectionString": false,
@@ -15,8 +15,12 @@
    "T4TemplatePath": null,
    "Tables": [
       {
-         "Name": "[DWH].[TotalSuported]",
-         "ObjectType": 3
+         "Name": "[dbo].[FactSales]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[FactSupportedCustomers]",
+         "ObjectType": 0
       }
    ],
    "UiHint": null,
